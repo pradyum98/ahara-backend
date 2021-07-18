@@ -47,6 +47,11 @@ public class QRController {
 		
 		QRGeneratorService.generateQRCodeImage(codeText.toString(), width, height, QR_CODE_IMAGE_PATH);
 	}
+	
+	@GetMapping(value = "/")
+	public ResponseEntity<String> download()throws Exception {		
+		return ResponseEntity.status(HttpStatus.OK).body("Success");
+	}
 
 	@PostMapping(value = "/genrateQRCode/{width}/{height}" )
 	public ResponseEntity<ArrayList<byte[]>> generateQRCode(
