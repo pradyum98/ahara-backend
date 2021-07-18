@@ -14,8 +14,11 @@ import com.google.cloud.firestore.FirestoreOptions;
 @Configuration
 public class FireStoreConfig {
 	@Bean
-	public Firestore getFireStore(@Value("${firebase.credential.path}") String credentialPath) throws IOException {
-		var serviceAccount = new FileInputStream(credentialPath);
+	public Firestore getFireStore() throws IOException {
+		final ClassLoader classLoader = getClass().getClassLoader();
+
+//		var serviceAccount = new FileInputStream(credentialPath);
+		var serviceAccount = classLoader.getResourceAsStream("service-account-credentials.json");
 		var credentials = GoogleCredentials.fromStream(serviceAccount);
 
 		var options = FirestoreOptions.newBuilder()
